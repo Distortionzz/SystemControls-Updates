@@ -1,36 +1,25 @@
 @echo off
-title System Information
-color 0A
+title System Control v1 - Option 1
+setlocal enabledelayedexpansion
 
-if not "%menu_access%"=="authorized" (
-    echo Please start from the Welcome screen to access this feature. Redirecting you now...
-    timeout /t 3 >nul
-    call Welcome.bat
+:: Define mutex file
+set "mutex_file=%temp%\SystemControls.lock"
+
+:: Check if another instance is already running
+if exist "%mutex_file%" (
+    echo Another instance of System Controls v1 is already running!
+    echo Please close the other instance before starting this one.
+    pause
     exit
 )
 
+:: Create the mutex
+echo Running... > "%mutex_file%"
 
-:SYSTEM_INFO
-cls
-echo ==============================
-echo       System Information
-echo ==============================
-echo Computer Name: %COMPUTERNAME%
-for /f "tokens=2 delims==" %%a in ('wmic os get Caption /value ^| find "="') do echo Operating System: %%a
-for /f "tokens=2 delims==" %%a in ('wmic cpu get Name /value ^| find "="') do echo Processor: %%a
-for /f "tokens=*" %%a in ('powershell -command "Get-WmiObject Win32_VideoController | Select-Object -ExpandProperty Name"') do (
-    echo Graphics Card: %%a
-)
-echo ==============================
-echo [M] Return to Main Menu
-echo [E] Exit
-echo ==============================
-set /p choice=Please choose an option (M/E): 
-if /i "%choice%"=="M" call MainMenu.bat
-if /i "%choice%"=="E" goto EXIT
+:: Main Option 1 Logic Here
+echo Displaying System Information...
+timeout /t 5 >nul
 
-echo Invalid choice. Please try again.
-goto SYSTEM_INFO
-
-:EXIT
+:: Cleanup on exit
+del "%mutex_file%" >nul 2>&1
 exit
