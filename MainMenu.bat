@@ -70,6 +70,7 @@ echo Invalid selection. Please try again.
 timeout /t 2 >nul
 goto main_menu
 
+:exit_cleanup
 :: Cleanup on exit
 del "%mutex_file%" >nul 2>&1
 exit
