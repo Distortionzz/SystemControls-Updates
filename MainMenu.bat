@@ -19,7 +19,6 @@ echo.
 echo [1] View System Information
 echo [2] Network Information Viewer
 echo [3] Application Launcher
-echo [4] Check for Updates
 echo [E] Exit
 echo.
 echo ===================================================
@@ -30,7 +29,6 @@ set /p menu_choice=Select an option:
 if /i "!menu_choice!"=="1" call Option1.bat
 if /i "!menu_choice!"=="2" call Option2.bat
 if /i "!menu_choice!"=="3" call Option3.bat
-if /i "!menu_choice!"=="4" call Option4.bat
 if /i "!menu_choice!"=="E" exit
 if /i "!menu_choice!"=="e" exit
 
