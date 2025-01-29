@@ -61,12 +61,17 @@ if "%choice%"=="2" (
 if "%choice%"=="3" (
     cls
     echo ===================================================================================
-    echo                                    HELP MENU
+    echo                                     HELP MENU
     echo ===================================================================================
     echo [1] Launch Main Frame  - Start the main system interface.
-    echo [2] Restart Program    - Restart the system without closing the console.
-    echo [3] Help               - Show this help menu.
-    echo [4] Exit               - Close the program.
+    echo [2] Restart Program    - Restart System Controls without closing the console.
+    echo [3] Help               - Display this help menu with detailed descriptions.
+    echo [4] Check for Updates  - Verify if a new version is available. If updates are 
+    echo                          found, a download link will be provided.
+    echo [5] Exit               - Close System Controls safely.
+    echo ===================================================================================
+    echo NOTE: Updates are manually installed. If an update is available, visit the 
+    echo       provided GitHub link to download the latest version.
     echo ===================================================================================
     echo Press any key to return to the Welcome screen...
     pause >nul
