@@ -12,9 +12,9 @@ set "menu_access=authorized"
 :: Define GitHub update server URL (Correct raw URL)
 set "UPDATE_SERVER=https://raw.githubusercontent.com/Distortionzz/SystemControls-Updates/main"
 
-:: List of files to check for updates (excluding Welcome.bat here)
-set "FILES=Option1.bat Option2.bat Option3.bat MainMenu.bat"
-set "VER_FILES=Option1_version.txt Option2_version.txt Option3_version.txt MainMenu_version.txt"
+:: List of files to check for updates
+set "FILES=Option1.bat Option2.bat Option3.bat MainMenu.bat SplashScreen.bat SystemUtilities.bat CustomScripts.bat UserPreferences.bat"
+set "VER_FILES=Option1_version.txt Option2_version.txt Option3_version.txt MainMenu_version.txt SplashScreen_version.txt SystemUtilities_version.txt CustomScripts_version.txt UserPreferences_version.txt"
 set "WELCOME_VERSION_FILE=Welcome_version.txt"
 
 :: Ensure local version files exist
