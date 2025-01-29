@@ -3,13 +3,27 @@ title Welcome - System Controls v1
 color 0A
 cls
 
-:: Enable Delayed Expansion
+:: Define mutex file
+set "mutex_file=%temp%\SystemControls.lock"
+
+:: Check if another instance is already running
+if exist "%mutex_file%" (
+    echo Another instance of System Controls v1 is already running!
+    echo Please close the other instance before starting this one.
+    pause
+    exit
+)
+
+:: Create the mutex
+echo Running... > "%mutex_file%"
+
+:: Enable delayed expansion
 setlocal enabledelayedexpansion
 
 :: Set access variable (ensures users go through Welcome first)
 set "menu_access=authorized"
 
-:: Define GitHub update server URL (Correct raw URL)
+:: Define GitHub update server URL
 set "UPDATE_SERVER=https://raw.githubusercontent.com/Distortionzz/SystemControls-Updates/main"
 
 :: List of files to check for updates
@@ -77,8 +91,7 @@ echo ===========================================================================
 echo [1] Launch Main Frame  - Start the main system interface.
 echo [2] Restart Program    - Restart System Controls without closing the console.
 echo [3] Help               - Display this help menu with detailed descriptions.
-echo [4] Check for Updates  - Verify if a new version is available. If updates are 
-echo                          found, a download link will be provided.
+echo [4] Check for Updates  - Verify if a new version is available.
 echo [5] Exit               - Close System Controls safely.
 echo ===================================================================================
 echo NOTE: Updates are manually installed. If an update is available, visit the 
@@ -175,5 +188,8 @@ goto MAIN_MENU
 
 :exit_program
 echo Exiting System Controls...
+
+:: Remove the mutex (lock file) on exit
+del "%mutex_file%" >nul 2>&1
 timeout /t 2 >nul
 exit
