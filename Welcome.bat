@@ -13,8 +13,8 @@ set "menu_access=authorized"
 set "UPDATE_SERVER=https://raw.githubusercontent.com/Distortionzz/SystemControls-Updates/main"
 
 :: List of files to check for updates
-set "FILES=Option1.bat Option2.bat Option3.bat MainMenu.bat SplashScreen.bat SystemUtilities.bat AccessNotice.bat"
-set "VER_FILES=Option1_version.txt Option2_version.txt Option3_version.txt MainMenu_version.txt SplashScreen_version.txt SystemUtilities_version.txt AccessNotice_version.txt"
+set "FILES=Option1.bat Option2.bat Option3.bat MainMenu.bat SplashScreen.bat SystemUtilities.bat"
+set "VER_FILES=Option1_version.txt Option2_version.txt Option3_version.txt MainMenu_version.txt SplashScreen_version.txt SystemUtilities_version.txt"
 set "WELCOME_VERSION_FILE=Welcome_version.txt"
 
 :: Ensure local version files exist
@@ -61,7 +61,6 @@ goto MAIN_MENU
 :launch_main_frame
 echo Launching Main Frame...
 call SplashScreen.bat
-call AccessNotice.bat
 call MainMenu.bat
 goto MAIN_MENU
 
