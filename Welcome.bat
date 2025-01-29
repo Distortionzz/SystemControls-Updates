@@ -37,7 +37,6 @@ echo ===========================================================================
 echo                                        By Eddy
 echo                                  Built with ChatGPT
 echo ===================================================================================
-echo Current Version: 1.0
 echo Please select an option:
 echo.
 echo   [1] Launch Main Frame
