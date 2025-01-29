@@ -3,6 +3,20 @@ title Loading System Controls v1
 color 0A
 cls
 
+:: Define mutex file
+set "mutex_file=%temp%\SystemControls.lock"
+
+:: Check if another instance is already running
+if exist "%mutex_file%" (
+    echo Another instance of System Controls v1 is already running!
+    echo Please close the other instance before starting this one.
+    pause
+    exit
+)
+
+:: Create the mutex
+echo Running... > "%mutex_file%"
+
 :: Enable Delayed Expansion
 setlocal enabledelayedexpansion
 
@@ -95,3 +109,7 @@ if exist MainMenu.bat (
     pause
     exit
 )
+
+:: Cleanup on exit
+del "%mutex_file%" >nul 2>&1
+exit
