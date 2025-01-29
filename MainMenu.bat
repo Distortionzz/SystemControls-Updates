@@ -2,6 +2,20 @@
 title System Control v1 - Main Menu
 setlocal enabledelayedexpansion
 
+:: Define mutex file
+set "mutex_file=%temp%\SystemControls.lock"
+
+:: Check if another instance is already running
+if exist "%mutex_file%" (
+    echo Another instance of System Controls v1 is already running!
+    echo Please close the other instance before starting this one.
+    pause
+    exit
+)
+
+:: Create the mutex
+echo Running... > "%mutex_file%"
+
 :: Security check to ensure access only from the Welcome screen
 if not "%menu_access%"=="authorized" (
     echo Please start from the Welcome screen to access this feature. Redirecting you now...
@@ -55,3 +69,7 @@ if /i "!menu_choice!"=="e" exit
 echo Invalid selection. Please try again.
 timeout /t 2 >nul
 goto main_menu
+
+:: Cleanup on exit
+del "%mutex_file%" >nul 2>&1
+exit
