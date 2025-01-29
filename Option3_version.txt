@@ -12,7 +12,7 @@ if not "%menu_access%"=="authorized" (
 :APP_LAUNCHER
 cls
 echo ==============================
-echo       Application Launchers
+echo       Application Launcherss
 echo ==============================
 echo [1] Open Default Browser
 echo [2] Open YouTube
