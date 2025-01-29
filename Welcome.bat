@@ -17,7 +17,7 @@ if exist "%mutex_file%" (
 :: Create the mutex
 echo Running... > "%mutex_file%"
 
-:: Enable delayed expansion
+:: Enable Delayed Expansion
 setlocal enabledelayedexpansion
 
 :: Set access variable (ensures users go through Welcome first)
@@ -148,48 +148,4 @@ for %%F in (%FILES%) do (
         set /p LOCAL_VERSION=<!BASE_NAME!_version.txt
     ) else (
         echo 1.0 > !BASE_NAME!_version.txt
-        set "LOCAL_VERSION=1.0"
-    )
-
-    :: Fetch latest version from GitHub
-    for /f "tokens=* delims=" %%A in ('powershell -command "(New-Object Net.WebClient).DownloadString('%UPDATE_SERVER%/!BASE_NAME!_version.txt')"') do set "LATEST_VERSION=%%A"
-
-    :: Display versions
-    echo Checking: %%F
-    echo Installed Version: !LOCAL_VERSION!
-    echo Latest Version: !LATEST_VERSION!
-
-    if not "!LOCAL_VERSION!"=="!LATEST_VERSION!" (
-        echo.
-        echo *** UPDATE AVAILABLE for %%F ***
-        echo A new version is available. Please download it manually:
-        echo %UPDATE_SERVER%/%%F
-        echo.
-        set "UPDATE_FOUND=true"
-    ) else (
-        echo No updates found for %%F.
-    )
-    echo.
-)
-
-:: Notify user if updates were found
-if "%UPDATE_FOUND%"=="true" (
-    echo Updates are available. Please visit the GitHub repository to download the updated files.
-    echo GitHub Repository: https://github.com/Distortionzz/SystemControls-Updates
-) else (
-    echo No updates available.
-)
-
-echo.
-echo Update check completed successfully.
-echo Press any key to return to the menu...
-pause >nul
-goto MAIN_MENU
-
-:exit_program
-echo Exiting System Controls...
-
-:: Remove the mutex (lock file) on exit
-del "%mutex_file%" >nul 2>&1
-timeout /t 2 >nul
-exit
+        set "LOCAL_VERSION=1.0
