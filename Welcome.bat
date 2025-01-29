@@ -13,8 +13,8 @@ set "menu_access=authorized"
 set "UPDATE_SERVER=https://raw.githubusercontent.com/Distortionzz/SystemControls-Updates/main"
 
 :: List of files to check for updates
-set "FILES=Option1.bat Option2.bat Option3.bat MainMenu.bat SplashScreen.bat SystemUtilities.bat CustomScripts.bat UserPreferences.bat"
-set "VER_FILES=Option1_version.txt Option2_version.txt Option3_version.txt MainMenu_version.txt SplashScreen_version.txt SystemUtilities_version.txt CustomScripts_version.txt UserPreferences_version.txt"
+set "FILES=Option1.bat Option2.bat Option3.bat MainMenu.bat SplashScreen.bat SystemUtilities.bat AccessNotice.bat"
+set "VER_FILES=Option1_version.txt Option2_version.txt Option3_version.txt MainMenu_version.txt SplashScreen_version.txt SystemUtilities_version.txt AccessNotice_version.txt"
 set "WELCOME_VERSION_FILE=Welcome_version.txt"
 
 :: Ensure local version files exist
@@ -47,50 +47,49 @@ echo   [5] Exit
 echo.
 set /p choice=Enter your choice: 
 
-if "%choice%"=="1" (
-    echo Launching Main Frame...
-    call SplashScreen.bat
-    goto MAIN_MENU
-)
-if "%choice%"=="2" (
-    echo Restarting...
-    timeout /t 2 >nul
-    goto MAIN_MENU
-)
-if "%choice%"=="3" (
-    cls
-    echo ===================================================================================
-    echo                                     HELP MENU
-    echo ===================================================================================
-    echo [1] Launch Main Frame  - Start the main system interface.
-    echo [2] Restart Program    - Restart System Controls without closing the console.
-    echo [3] Help               - Display this help menu with detailed descriptions.
-    echo [4] Check for Updates  - Verify if a new version is available. If updates are 
-    echo                          found, a download link will be provided.
-    echo [5] Exit               - Close System Controls safely.
-    echo ===================================================================================
-    echo NOTE: Updates are manually installed. If an update is available, visit the 
-    echo       provided GitHub link to download the latest version.
-    echo ===================================================================================
-    echo Press any key to return to the Welcome screen...
-    pause >nul
-    goto MAIN_MENU
-)
-if "%choice%"=="4" (
-    call :CHECK_UPDATES
-)
-if "%choice%"=="5" (
-    echo Exiting System Controls...
-    timeout /t 2 >nul
-    exit
-)
+if "%choice%"=="1" goto launch_main_frame
+if "%choice%"=="2" goto restart_program
+if "%choice%"=="3" goto help_menu
+if "%choice%"=="4" goto check_updates
+if "%choice%"=="5" goto exit_program
 
 :: Invalid input handling - Loop back to the menu
 echo Invalid selection! Please enter a valid option.
 timeout /t 2 >nul
 goto MAIN_MENU
 
-:CHECK_UPDATES
+:launch_main_frame
+echo Launching Main Frame...
+call SplashScreen.bat
+call AccessNotice.bat
+call MainMenu.bat
+goto MAIN_MENU
+
+:restart_program
+echo Restarting...
+timeout /t 2 >nul
+goto MAIN_MENU
+
+:help_menu
+cls
+echo ===================================================================================
+echo                                     HELP MENU
+echo ===================================================================================
+echo [1] Launch Main Frame  - Start the main system interface.
+echo [2] Restart Program    - Restart System Controls without closing the console.
+echo [3] Help               - Display this help menu with detailed descriptions.
+echo [4] Check for Updates  - Verify if a new version is available. If updates are 
+echo                          found, a download link will be provided.
+echo [5] Exit               - Close System Controls safely.
+echo ===================================================================================
+echo NOTE: Updates are manually installed. If an update is available, visit the 
+echo       provided GitHub link to download the latest version.
+echo ===================================================================================
+echo Press any key to return to the Welcome screen...
+pause >nul
+goto MAIN_MENU
+
+:check_updates
 cls
 echo ===================================================================================
 echo                              CHECKING FOR UPDATES
@@ -174,3 +173,8 @@ echo Update check completed successfully.
 echo Press any key to return to the menu...
 pause >nul
 goto MAIN_MENU
+
+:exit_program
+echo Exiting System Controls...
+timeout /t 2 >nul
+exit
